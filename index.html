@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>revive & rise | Videos, Blog & Portfolio</title>
+<style>
+/* GENERAL */
+html { scroll-behavior: smooth; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0; padding:0; line-height:1.6; color:#333; background-color:#f5f5f5; }
+
+/* NAVIGATION */
+nav { background-color:#2e7d32; position:sticky; top:0; z-index:1000; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
+.nav-container { display:flex; justify-content:space-between; align-items:center; padding:15px 20px; max-width:1100px; margin:0 auto; }
+.nav-links a { color:white; text-decoration:none; margin:0 15px; font-weight:bold; font-size:18px; transition: color 0.3s, transform 0.2s; }
+.nav-links a:hover { color:#81c784; transform:scale(1.05); }
+.logo { color:white; font-weight:bold; font-size:22px; letter-spacing:1px; }
+.hamburger { display:none; font-size:28px; cursor:pointer; color:white; }
+
+/* HEADER */
+header { 
+    background: url('https://via.placeholder.com/1200x400/43a047/ffffff?text=Health+Channel+Banner') no-repeat center center/cover; 
+    height:450px; 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center; 
+    align-items:center; 
+    color:white; 
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.7); 
+}
+header h1 { font-size:3.2rem; margin:0; }
+header p { font-size:1.6rem; margin-top:10px; }
+
+/* SECTIONS */
+section { padding:60px 20px; max-width:1100px; margin:0 auto; }
+h2 { text-align:center; color:#2e7d32; border-bottom:3px solid #2e7d32; display:inline-block; padding-bottom:10px; margin-bottom:40px; }
+.section-header { text-align:center; }
+
+/* VIDEO GALLERY */
+.gallery-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap:20px; }
+.video-card { position:relative; background:white; border-radius:12px; overflow:hidden; box-shadow:0 6px 12px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
+.video-card:hover { transform:translateY(-8px); box-shadow:0 12px 20px rgba(0,0,0,0.15); }
+.card-info { padding:15px; position:relative; z-index:2; }
+.video-card::after {
+    content:"";
+    position:absolute;
+    top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(to top, rgba(46,125,50,0.7), rgba(46,125,50,0));
+    opacity:0;
+    transition:opacity 0.3s;
+    z-index:1;
+}
+.video-card:hover::after { opacity:1; }
+
+/* BLOG */
+#blog { background-color:#f1f8e9; }
+.blog-list { display:flex; flex-direction:column; gap:20px; }
+.blog-card { position:relative; background:white; padding:20px; border-left:6px solid #2e7d32; box-shadow:0 3px 6px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; }
+.blog-card:hover { transform:translateY(-5px); box-shadow:0 10px 15px rgba(0,0,0,0.1); }
+.blog-card::after {
+    content:"";
+    position:absolute;
+    top:0; left:0; width:100%; height:100%;
+    background:linear-gradient(to top, rgba(46,125,50,0.15), rgba(46,125,50,0));
+    opacity:0;
+    transition:opacity 0.3s;
+    z-index:0;
+}
+.blog-card:hover::after { opacity:1; }
+.read-more-toggle { display:inline-block; margin-top:10px; color:#2e7d32; font-weight:bold; cursor:pointer; text-decoration:none; transition:color 0.3s; }
+.read-more-toggle:hover { color:#66bb6a; text-decoration:underline; }
+.blog-full { max-height:0; overflow:hidden; transition:max-height 0.5s ease; }
+.blog-full.open { max-height:2000px; }
+.blog-full p, .blog-full h4, .blog-full ul { margin:10px 0; }
+
+/* PORTFOLIO */
+.portfolio-container { display:flex; align-items:center; justify-content:center; gap:40px; flex-wrap:wrap; padding:20px 0; }
+.portfolio-container img { width:200px; height:200px; border-radius:50%; object-fit:cover; border:5px solid #2e7d32; flex-shrink:0; margin-bottom:20px; transition: transform 0.3s, box-shadow 0.3s; }
+.portfolio-container img:hover { transform:scale(1.05); box-shadow:0 8px 15px rgba(0,0,0,0.2); }
+.about-text { max-width:600px; flex-basis:60%; text-align:center; }
+.stats { display:flex; gap:20px; margin-top:20px; flex-wrap:wrap; }
+.stat-box { background:#2e7d32; color:white; padding:12px 22px; border-radius:8px; text-align:center; flex:1 1 100px; transition:background 0.3s; }
+.stat-box:hover { background:#43a047; }
+.social-links { margin-top:20px; font-size:1.1em; text-align:center; }
+.social-links a { color:#2e7d32; text-decoration:none; font-weight:bold; margin:0 5px; transition: color 0.3s; }
+.social-links a:hover { color:#66bb6a; }
+
+/* FOOTER */
+footer { background-color:#121212; color:#f5f5f5; text-align:center; padding:25px; margin-top:50px; font-size:0.95em; }
+
+/* RESPONSIVE */
+@media (max-width:768px) {
+    .hamburger { display:block; }
+    .nav-links { display:none; flex-direction:column; width:100%; text-align:center; background-color:#2e7d32; }
+    .nav-links.show { display:flex; }
+    .nav-links a { margin:10px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <div class="nav-container">
+        <div class="logo">revive & rise</div>
+        <div class="hamburger">&#9776;</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#videos">Video Gallery</a>
+            <a href="#blog">Health Blog</a>
+            <a href="#portfolio">My Portfolio</a>
+        </div>
+    </div>
+</nav>
+
+<!-- HEADER -->
+<header id="home">
+    <h1>Welcome to revive & rise</h1>
+    <p>Transform your body, transform your life.</p>
+</header>
+
+<!-- VIDEO GALLERY -->
+<section id="videos">
+    <div class="section-header">
+        <h2>Video Gallery</h2>
+        <p>Watch my latest YouTube Videos</p>
+    </div>
+    <div class="gallery-grid">
+        <div class="video-card">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/7OtPxTBweFA" frameborder="0" allowfullscreen></iframe>
+            <div class="card-info">
+                <h3>What Really Happens When You Hold Your Pee Too Long?</h3>
+                <p>Is holding your pee bad for you?</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/cnuZ-LRB9JE?si=DLTrGiAzhqXZhQhg" frameborder="0" allowfullscreen></iframe>
+            <div class="card-info">
+                <h3>12 Brain Warning Signs You Shouldn’t Ignore</h3>
+                <p>12 Brain Warning Signs You Shouldn’t Ignore.</p>
+            </div>
+        </div>
+        <div class="video-card">
+            <iframe width="100%" height="315" src="https://www.youtube.com/embed/rAmG0H9aOc0?si=dGiWWExjAYdz45fQ" frameborder="0" allowfullscreen></iframe>
+            <div class="card-info">
+                <h3>Every Mineral Your Body Needs Explained In 8 Minutes</h3>
+                <p>In this video, we break down every essential mineral your body needs, what it does, why it matters, and the signs you might be deficient.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+    <div class="section-header">
+        <h2>Health Blog</h2>
+        <p>Read health tips and articles</p>
+    </div>
+    <div class="blog-list">
+
+        <!-- Blog 1 -->
+        <div class="blog-card">
+            <h3>5 Ways to Reduce Sugar Intake</h3>
+            <div class="blog-preview">
+                <p>Excessive sugar consumption is a major health concern today. From sodas and candies to seemingly “healthy” snacks, sugar is everywhere. Too much sugar can lead to obesity, diabetes, heart problems, and even affect your mood and energy levels...</p>
+            </div>
+            <div class="blog-full">
+                <p><strong>The good news?</strong> You don’t need to eliminate sugar completely. With a few simple changes, you can reduce sugar in your daily diet and feel healthier. Here are <strong>5 practical ways to cut back on sugar</strong>.</p>
+                <h4>1. Read Labels Carefully</h4>
+                <ul>
+                    <li>Look for terms like <strong>sucrose, high-fructose corn syrup, maltose, dextrose</strong>.</li>
+                    <li>Check <strong>nutrition labels</strong> for total sugar and added sugar.</li>
+                    <li>Avoid foods that list sugar as one of the first ingredients.</li>
+                </ul>
+                <h4>2. Cut Back on Sugary Drinks</h4>
+                <p>Sugary drinks are one of the biggest sources of added sugar. Think soda, fruit juices, energy drinks, and sweetened coffees.</p>
+                <h4>3. Choose Natural Sweeteners</h4>
+                <p>Replace refined sugar with <strong>natural sweeteners</strong> like honey, dates, or stevia when needed.</p>
+                <h4>4. Eat Whole Fruits Instead of Desserts</h4>
+                <p>Swap candies, cakes, or ice cream with fresh fruit salads or smoothies.</p>
+                <h4>5. Cook More at Home</h4>
+                <p>Cooking at home gives you full control over what goes into your meals. Gradually reduce sugar and use spices like cinnamon or vanilla to naturally enhance sweetness.</p>
+                <h4>Conclusion</h4>
+                <p>Reducing sugar doesn’t mean cutting out all sweetness—it’s about <strong>moderation and smart choices</strong>. By reading labels, cutting sugary drinks, using natural sweeteners, eating fruits, and cooking at home, you can lower your sugar intake, improve energy, maintain a healthy weight, and reduce the risk of chronic diseases.</p>
+            </div>
+            <a href="javascript:void(0);" class="read-more-toggle">Read More →</a>
+        </div>
+
+        <!-- Blog 2 -->
+        <div class="blog-card">
+            <h3>The Right Time to Drink Water</h3>
+            <div class="blog-preview">
+                <p>Did you know you shouldn't drink water immediately after eating? Learn the scientific reason...</p>
+            </div>
+            <div class="blog-full">
+                <p>Drinking water at the right times can help digestion, boost metabolism, and keep you hydrated effectively. Avoid drinking large amounts of water immediately after meals as it can dilute digestive juices and slow down digestion. Instead, sip water throughout the day, especially before meals, in the morning, and after exercise.</p>
+            </div>
+            <a href="javascript:void(0);" class="read-more-toggle">Read More →</a>
+        </div>
+
+        <!-- Blog 3 -->
+        <div class="blog-card">
+            <h3>5 Simple Steps to Better Sleep</h3>
+            <div class="blog-preview">
+                <p>Good sleep is essential for your recovery. Improve your sleep quality with the right routines and tips...</p>
+            </div>
+            <div class="blog-full">
+                <p>Quality sleep helps repair muscles, boosts brain function, and strengthens immunity. Here are 5 steps to improve sleep:</p>
+                <ul>
+                    <li>Maintain a consistent sleep schedule.</li>
+                    <li>Limit caffeine and heavy meals before bed.</li>
+                    <li>Create a calm and dark sleeping environment.</li>
+                    <li>Reduce screen time an hour before sleeping.</li>
+                    <li>Incorporate relaxing routines like reading or meditation.</li>
+                </ul>
+            </div>
+            <a href="javascript:void(0);" class="read-more-toggle">Read More →</a>
+        </div>
+
+    </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+    <div class="section-header">
+        <h2>About Me / Portfolio</h2>
+    </div>
+    <div class="portfolio-container">
+        <img src="https://i.postimg.cc/5Hz9shPs/your-image.jpg" alt="Portrait of Muhammad Afzaal, Certified Fitness Trainer">
+        <div class="about-text">
+            <h3>Hi, I am Muhammad Afzaal.</h3>
+            <p>I am a Certified Fitness Trainer and Nutritionist. Over the past 5 years, I have helped 100+ people in their weight loss journey.</p>
+            <p><strong>My Mission:</strong> To bring accurate health knowledge to every household.</p>
+            <div class="stats">
+                <div class="stat-box"><strong>5+ Years</strong><br>Experience</div>
+                <div class="stat-box"><strong>500+</strong><br>Videos</div>
+                <div class="stat-box"><strong>10k+</strong><br>Subscribers</div>
+            </div>
+            <div class="social-links">
+                <a href="https://youtube.com/@reviverise-j8s?si=x-Qlr1DlPk-cvy26">YouTube</a> |
+                <a href="https://www.instagram.com/afz_aal94?igsh=MW8yc3J4NzJqcXc3Yw==">Instagram</a> |
+                <a href="https://www.facebook.com/share/1AKJ61F7Wh/">Facebook</a>
+            </div>
+            <br>
+            <a href="mailto:reviverise08@gmail.com" style="color:#81c784;font-weight:bold;">Contact Me</a>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2025 revive & rise. All rights reserved.</p>
+</footer>
+
+<!-- JS -->
+<script>
+// Hamburger menu
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', () => { navLinks.classList.toggle('show'); });
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        if(navLinks.classList.contains('show')) navLinks.classList.remove('show');
+    });
+});
+
+// Read More / Read Less
+document.querySelectorAll('.read-more-toggle').forEach(button => {
+    button.addEventListener('click', () => {
+        const blogCard = button.closest('.blog-card');
+        const fullContent = blogCard.querySelector('.blog-full');
+        const preview = blogCard.querySelector('.blog-preview');
+        if(!fullContent || !preview) return;
+
+        if(!fullContent.classList.contains('open')){
+            fullContent.classList.add('open');
+            preview.style.display='none';
+            button.textContent='Read Less ←';
+        } else {
+            fullContent.classList.remove('open');
+            preview.style.display='block';
+            button.textContent='Read More →';
+        }
+    });
+});
+</script>
+
+</body>
+</html>
